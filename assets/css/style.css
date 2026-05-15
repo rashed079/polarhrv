@@ -1,0 +1,259 @@
+/* ─────────────────────────────────────────────────────────────
+   Polar HRV Orthostatic App — Stylesheet
+   All design tokens and component styles live here.
+   index.html references this file; inline styles in index.html
+   are kept only for dynamic/JS-driven values.
+───────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* ── DESIGN TOKENS ──────────────────────────────────────── */
+:root {
+  --bg:      #0c0c14;
+  --card:    #13131f;
+  --border:  #1f1f35;
+  --accent:  #e94057;
+  --pink:    #f5a7b8;
+  --blue:    #4f8ef7;
+  --green:   #22d3a0;
+  --yellow:  #f5c542;
+  --text:    #f0edf5;
+  --muted:   #6b698a;
+  --mono:    'IBM Plex Mono', monospace;
+  --serif:   'Fraunces', serif;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow:    0 4px 24px rgba(0,0,0,0.4);
+}
+
+/* ── RESET ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Ambient background glow */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(233,64,87,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 90%, rgba(79,142,247,0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── TYPOGRAPHY ─────────────────────────────────────────── */
+h1 { font-size: 20px; font-weight: 600; }
+h2 { font-size: 15px; font-weight: 600; }
+h3 { font-size: 13px; font-weight: 600; }
+
+.mono  { font-family: var(--mono); }
+.muted { color: var(--muted); }
+.label {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+/* ── LAYOUT ─────────────────────────────────────────────── */
+.z1   { position: relative; z-index: 1; }
+.container { max-width: 1300px; margin: 0 auto; padding: 24px 32px; }
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.site-header {
+  position: relative; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(12,12,20,0.9);
+  backdrop-filter: blur(10px);
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+
+.heart-icon {
+  font-size: 24px;
+  animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15%       { transform: scale(1.18); }
+  30%       { transform: scale(1); }
+  45%       { transform: scale(1.12); }
+}
+
+.brand-name { font-size: 17px; font-weight: 700; letter-spacing: -0.5px; }
+.brand-sub  { font-size: 11px; color: var(--muted); font-family: var(--mono); margin-top: 1px; }
+
+/* ── BADGE ───────────────────────────────────────────────── */
+.badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 1px solid;
+}
+
+.badge-accent {
+  background: rgba(233,64,87,0.12);
+  border-color: rgba(233,64,87,0.3);
+  color: var(--accent);
+}
+
+.badge-green {
+  background: rgba(34,211,160,0.1);
+  border-color: rgba(34,211,160,0.25);
+  color: var(--green);
+}
+
+/* live recording dot */
+.rec-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+  margin-right: 6px;
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
+}
+
+/* ── CARD / PANEL ────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+/* coloured top accent bar */
+.card-accent-red    { border-top: 3px solid var(--accent); }
+.card-accent-green  { border-top: 3px solid var(--green);  }
+.card-accent-blue   { border-top: 3px solid var(--blue);   }
+.card-accent-yellow { border-top: 3px solid var(--yellow); }
+.card-accent-pink   { border-top: 3px solid var(--pink);   }
+
+/* ── METRIC VALUE ────────────────────────────────────────── */
+.metric-val {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--mono);
+  line-height: 1;
+}
+.metric-unit {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: var(--mono);
+  margin-top: 2px;
+}
+
+/* ── TABLE ───────────────────────────────────────────────── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+
+.data-table th {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.data-table td {
+  padding: 10px 10px;
+  border-bottom: 1px solid rgba(31,31,53,0.8);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td      { background: rgba(255,255,255,0.015); }
+
+/* Result states */
+.result-pass       { color: var(--green);  }
+.result-borderline { color: var(--yellow); }
+.result-flag       { color: var(--accent); }
+
+/* ── PHASE TIMELINE BAR ──────────────────────────────────── */
+.phase-bar {
+  display: flex;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  height: 36px;
+  margin-bottom: 12px;
+}
+
+.phase-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  font-family: var(--mono);
+  letter-spacing: 0.5px;
+}
+
+.phase-supine     { background: rgba(79,142,247,0.2);  color: var(--blue);   }
+.phase-transition { background: rgba(233,64,87,0.3);   color: var(--accent); }
+.phase-standing   { background: rgba(34,211,160,0.2);  color: var(--green);  }
+
+/* ── GRID HELPERS ────────────────────────────────────────── */
+.grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.grid-2-1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.mb-4  { margin-bottom: 16px; }
+.mb-6  { margin-bottom: 24px; }
+.mb-8  { margin-bottom: 32px; }
+
+/* ── ECG PANEL ───────────────────────────────────────────── */
+.ecg-panel { margin-bottom: 20px; }
+.ecg-label {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+.site-footer {
+  text-align: center;
+  padding: 20px 32px;
+  font-size: 10px;
+  color: var(--muted);
+  font-family: var(--mono);
+  border-top: 1px solid var(--border);
+  margin-top: 24px;
+}
+
+/* ── SCROLLBAR ───────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
