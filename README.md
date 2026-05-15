@@ -115,7 +115,7 @@ polar-hrv-orthostatic/
 
 **Md Rashed Azad Chowdhury, PMP®**  
 Research Web Developer · CROSH, Laurentian University  
-[github.com/rashed079](https://github.com/rashed079) · [LinkedIn](https://linkedin.com/in/rashed-azad)
+[github.com/rashed079](https://github.com/rashed079) · [LinkedIn](https://www.linkedin.com/in/md-rashed-azad-chowdhury-pmp%C2%AE-a145325a/)
 
 ---
 
